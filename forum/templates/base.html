@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>一个论坛</title>
+	{% load static %}
+	<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="header clearfix">
+			<h3 class="text-muted"><a href="{% url 'index' %}">一个论坛</a></h3>
+
+			<nav>
+				<ul class="nav nav-pills pull-right">
+					{% if user.is_authenticated %}
+						<li role="presentation">
+							<a href="{% url 'create' %}">Create a Post</a>
+						</li>
+						<li role="presentation">
+							<a href="{% url 'logout' %}">Logout(<b>{{user.username}}</b>)</a>
+						</li>
+					{% else %}
+						<li role="presentation">
+							<a href="{% url 'login' %}">Login</a>
+						</li>
+						<li role="presentation">
+							<a href="{% url 'signup' %}">Signup</a>
+						</li>
+					{% endif %}
+				</ul>
+			</nav>
+
+		</div>
+		<section id="content">{% block content %}{% endblock %}</section>
+		<footer class="footer"><p>&copy; 2017 一个论坛</p></footer>
+	</div>
+</body>
+</html>
